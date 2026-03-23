@@ -1,0 +1,6 @@
+data/creditcard.csv
+data/preprocessed_data.pkl
+venv/
+__pycache__/
+*.pyc
+.DS_Store
