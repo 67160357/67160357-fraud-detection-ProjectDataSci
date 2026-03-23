@@ -86,7 +86,12 @@ st.markdown("""
 # ─── Load Model ──────────────────────────────────────────────
 @st.cache_resource
 def load_model():
-    model_path = "../models/best_model_xgboost.pkl"
+    # รองรับทั้ง local และ Streamlit Cloud
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    model_path = os.path.join(base_dir, "models", "best_model_xgboost.pkl")
+    if not os.path.exists(model_path):
+        # fallback สำหรับ Streamlit Cloud
+        model_path = os.path.join(os.getcwd(), "models", "best_model_xgboost.pkl")
     if not os.path.exists(model_path):
         return None
     return joblib.load(model_path)
